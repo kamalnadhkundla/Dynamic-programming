@@ -53,4 +53,68 @@ class Knapsack {
 
 
 /*
-mem
+memorization
+public class Main
+{
+	public static void main(String[] args) {
+		int[] weigths=new int[]{1,3,4,5};
+		int[] profit=new int[]{1,4,5,7};
+		int weight=7;
+		int[][] dp=new int[weigths.length+1][weight+1];
+		
+		
+		System.out.println(knapsack(weigths,profit,weight,weigths.length,dp));
+	}
+	public static int knapsack(int[] weights, int[] profits, int weight , int len,int[][]dp){
+	    if(dp[len][weight]!=0)
+	         return dp[len][weight];
+	    if(weight==0 || len==0){
+	        return 0;
+	    }
+	    
+	    int x=0;
+	    if(weights[len-1]<=weight){
+	      x= profits[len-1]+ knapsack(weights,profits,weight-weights[len-1],len-1,dp);
+	    }
+	   int y= knapsack(weights,profits,weight,len-1,dp);
+	   dp[len][weight]= Math.max(x,y);
+	   return dp[len][weight];
+	    
+	}
+}
+
+*/
+
+top-down dp
+
+public class Main
+{
+	public static void main(String[] args) {
+		int[] weigths=new int[]{1,3,4,5};
+		int[] profit=new int[]{1,4,5,7};
+		int weight=7;
+		int[][] dp=new int[weigths.length+1][weight+1];
+		for(int i =0;i<=weight;i++)
+		    dp[0][i]=0;
+		    
+		for(int i =0;i<=weigths.length;i++)
+		  dp[i][0]=0;
+		for(int i=1;i<=weigths.length;i++)
+		{
+		    for(int j=1;j<=weight;j++){
+		        // check if the weight the valid if valid 2 options pick or not pick
+		        if(weigths[i-1]<=j)
+		        {
+		            dp[i][j]=Math.max(profit[i-1]+dp[i-1][j-weigths[i-1]],dp[i-1][j]);
+		        }
+		        else //not valid case
+		          dp[i][j]=dp[i-1][j];
+		    }
+		}
+		
+		System.out.println(dp[weigths.length][weight]);
+		
+		
+	
+	}
+}
