@@ -32,3 +32,30 @@ public class Main
 	   return diff;
 	}
 }
+
+// memorization
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		int[] arr ={1,2,7};
+		int totalsumarr=10;
+		Map<String,Integer> map=new HashMap<>();
+		System.out.println(getMinimumdiffernce(arr,totalsumarr,0,arr.length-1,map));
+	}
+	public static int getMinimumdiffernce(int[] arr,int totalsum,int calculatedsum,int ind,Map<String,Integer>map){
+	    String x= ind+" "+calculatedsum;
+	    if(map.containsKey(x))
+	         return map.get(x);
+	    if(ind==0){
+	        return Math.abs((totalsum-calculatedsum)-calculatedsum);
+	    }
+	    
+	   int diff=Math.min(getMinimumdiffernce(arr,totalsum,calculatedsum+arr[ind],ind-1,map),
+	   getMinimumdiffernce(arr,totalsum,calculatedsum,ind-1,map));
+	   map.put(x,diff);
+	   
+	   return diff;
+	}
+}
+
