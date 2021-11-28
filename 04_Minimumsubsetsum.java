@@ -58,4 +58,50 @@ public class Main
 	   return diff;
 	}
 }
+/*
+top down dp -> like other approaches we can not take every occurance and test so we need to take possible values from the dp subset sum problem then store the result in a
+linear data structure then test it;
+*/
+//top down dp
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		int[] arr ={1,2,7};
+		int totalsumarr=10;
+	boolean[][] dp = new boolean[arr.length+1][totalsumarr+1];
+		for(int i =0;i<=arr.length;i++)
+		    dp[i][0]=true;
+	   for (int i = 1; i <= totalsumarr; i++)
+            dp[0][i] = false;
+            
+       for(int i =1;i<=arr.length;i++){
+           for(int j=1;j<=totalsumarr;j++){
+               if(arr[i-1]<=j){
+                   dp[i][j]=dp[i-1][j]||dp[i-1][j-arr[i-1]];
+               }
+               else
+                    dp[i][j]=dp[i-1][j];
+                 }
+       }         
+      
+      //now take only those only possible values which are true in the last row 
+      ArrayList<Integer> list=new ArrayList<>();
+      for(int i=0;i<totalsumarr;i++)
+        {
+           if(dp[arr.length][i]==true)
+              list.add(i);
+        }
+        // for this particular example i will have 0 1 2 3 7 8 9 10 but i only store 0 1 2 3 7 8 9 to subtract from the range as 10 is totalsum
+       
+        int min=Integer.MAX_VALUE;
+        for(int i=0;i<list.size();i++){
+            int x=list.get(i);
+            min=Math.min(Math.abs(totalsumarr-x*2),min);
+        }
+    
+        System.out.println(min);
+        }
+
+}
 
