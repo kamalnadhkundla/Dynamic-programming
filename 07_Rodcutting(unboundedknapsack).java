@@ -77,5 +77,37 @@ static HashMap<String,Integer> map;
     }
 }
 */
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int len = 4;
+        int[] lengths = new int[]{1, 2,3,4
+        };
+        int[] profits = new int[]{ 1, 5, 8, 9 };
+
+        int[][] dp = new int[lengths.length+1][len+1];
+
+        for(int i =1;i<=lengths.length;i++){
+            for(int j=1;j<=len;j++){
+                if(lengths[i-1]<=j)
+                    dp[i][j]=Math.max(dp[i-1][j],profits[i-1]+dp[i][j-lengths[i-1]]);
+                else
+                    dp[i][j]=dp[i-1][j];
+            }
+        }
+
+        System.out.println(dp[lengths.length][len]);
+
+
+
+    }
+
+
+}
 
 
