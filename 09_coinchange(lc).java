@@ -54,6 +54,7 @@ public class Main {
             System.out.println(min);
 
         System.out.println(memo(arr,sum,arr.length,new HashMap<>()));
+        System.out.println(dpp(arr,sum));
     }
     public static int getcoins(int[] arr , int sum, int n ){
         if(n==0 || sum==0)
@@ -88,8 +89,25 @@ public class Main {
         return map.get(n+""+sum);
 
     }
+     public static int dpp(int[] arr ,  int sum ){
+        int[][] dp = new int[arr.length+1][sum+1];
+
+        for(int i=1;i<dp[0].length;i++)
+            dp[0][i]=(int)1e4;
+
+        for(int i =1;i<dp.length;i++){
+            for(int j =1;j<dp[0].length;j++){
+                if(arr[i-1]<=j)
+                    dp[i][j]=Math.min(dp[i-1][j],1+dp[i][j-arr[i-1]]);
+                else
+                    dp[i][j]=dp[i-1][j];
+            }
+        }
+
+        return dp[arr.length][sum];
+    }
 }
-*/
+*/ optimization than top-down dp 
 class Solution {
     public int coinChange(int[] coins, int amount) {
         if(amount==0) return 0;
