@@ -1,0 +1,16 @@
+longest common subsequence
+--------------------------------
+longest common  substring
+print lcs
+shortest common subsequence
+print scs
+minimum no of insertions and deletions
+largest repeating sequence
+length of largest subsequence of a which is a substring of b
+subsequence pattern matching
+count how many times a appears as a subsequnce as a substring in b
+largest palindormic substring
+largest palindromic subsequence
+count of palindromic subsequence
+minimum no of deletions to make a string into palindrome
+minimum no of insertions to make a string into palindrome
