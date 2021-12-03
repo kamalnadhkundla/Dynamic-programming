@@ -37,6 +37,58 @@ Constraints:
 1 <= coins[i] <= 231 - 1
 0 <= amount <= 104
 
+Recursion and memorization solution.
+import java.util.HashMap;
+
+public class Main {
+    static HashMap<String, Integer> hashmap;
+
+    public static void main(String[] args) {
+        hashmap = new HashMap<>();
+        int[] arr = new int[]{1, 2, 5};
+        int sum = 11;
+        int min=getcoins(arr,sum,arr.length);
+        if(min==(int)1e4)
+            System.out.println(-1);
+        else
+            System.out.println(min);
+
+        System.out.println(memo(arr,sum,arr.length,new HashMap<>()));
+    }
+    public static int getcoins(int[] arr , int sum, int n ){
+        if(n==0 || sum==0)
+        {
+            if(sum==0)
+                return 0;
+            else
+                return(int) 1e4;
+        }
+
+        if(arr[n-1]>sum)
+            return 0+getcoins(arr,sum,n-1);
+        else
+            return Math.min(0+getcoins(arr,sum,n-1),1+getcoins(arr,sum-arr[n-1],n));
+    }
+
+    public static int memo(int[] arr , int sum, int n , HashMap<String ,Integer> map){
+        if(map.containsKey(n+""+sum))
+            return map.get(n+""+sum);
+        if(n==0 || sum==0)
+        {
+            if(sum==0)
+                return 0;
+            else
+                return(int) 1e4;
+        }
+        if(arr[n-1]>sum)
+           map.put(n+""+sum,0+memo(arr,sum,n-1,map));
+        else
+            map.put(n+""+sum,Math.min(0+memo(arr,sum,n-1,map),1+memo(arr,sum-arr[n-1],n,map)));
+
+        return map.get(n+""+sum);
+
+    }
+}
 */
 class Solution {
     public int coinChange(int[] coins, int amount) {
