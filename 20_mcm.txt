@@ -1,0 +1,9 @@
+--------------------------------------------matrix chain multiplication---------------------------------------
+
+mcm
+printing mcm
+evalute expression to true/boolean paranthesis
+min/max value of an expression
+palindrom partitioning
+scramble string
+egg dropping problem
